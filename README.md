@@ -22,7 +22,13 @@ mixin padding($sides, $unit) {
     include: padding(10, em);
     extend: %this-placeholder;
 
+    // With semicolon
     include: block(10, em) {
+      background: blue;
+    }
+
+    // Without semicolon
+    include block(10, em) {
       background: blue;
     }
   }
@@ -50,6 +56,12 @@ Output:
     @include padding(10, em);
     @extend %this-placeholder;
 
+    // With semicolon
+    @include block(10, em) {
+      background: blue;
+    }
+
+    // Without semicolon
     @include block(10, em) {
       background: blue;
     }
