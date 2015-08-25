@@ -3,11 +3,17 @@ presass_at = postcss.plugin 'presass_at', ->
   return (css, result) ->
     css.eachRule (rule) ->
       selector = rule.selector
-      atrules = ['if', 'else', 'function', 'mixin', 'media']
+      atrules = ['if', 'else', 'function', 'mixin', 'media', 'include']
 
       for atrule in atrules
         if selector.slice(0, atrule.length) == atrule
-          rule.selector = '@' + selector
+          if atrule == 'include' # Include with content
+            if selector.indexOf(':') != -1 # With semicolon
+              rule.selector = '@include' + selector.slice(8)
+            else # Without semicolon
+              rule.selector = '@include' + selector.slice(7)
+          else
+            rule.selector = '@' + selector
 
     css.eachDecl (decl) ->
       prop = decl.prop
