@@ -2,7 +2,7 @@
 Optional at sign
 
 Input:
-```
+```css
 mixin padding($sides, $unit) {
   // ...
   content;
